@@ -33,6 +33,15 @@ def add_expense(expenses):
     except ValueError:
         print("Invalid amount. Please enter a number.")
 
+def view_expenses(expenses):
+    if not expenses:
+        print("No expenses recorded yet.")
+        return
+    
+    print("\n=== All Expenses ===")
+    for i, expense in enumerate(expenses, start=1):
+        print(f"{i}. {expense['date']} | {expense['category']} | ₹{expense['amount']} | {expense['description']}")
+
 def main():
     expenses = load_expenses()
     
@@ -50,11 +59,11 @@ def main():
             add_expense(expenses)
             save_expenses(expenses)
         elif choice == "2":
-            pass  # We'll build this later
+            view_expenses(expenses)
         elif choice == "3":
-            pass
+            pass  # Coming in Phase 3
         elif choice == "4":
-            pass
+            pass  # Coming later
         elif choice == "5":
             print("Goodbye!")
             break
