@@ -42,6 +42,21 @@ def view_expenses(expenses):
     for i, expense in enumerate(expenses, start=1):
         print(f"{i}. {expense['date']} | {expense['category']} | ₹{expense['amount']} | {expense['description']}")
 
+def delete_expense(expenses):
+    view_expenses(expenses)
+    if not expenses:
+        return
+    
+    try:
+        choice = int(input("\nEnter the number of the expense to delete: "))
+        if 1 <= choice <= len(expenses):
+            removed = expenses.pop(choice - 1)
+            print(f"Deleted: {removed['description']} (₹{removed['amount']})")
+        else:
+            print("Invalid number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
 def main():
     expenses = load_expenses()
     
@@ -61,9 +76,10 @@ def main():
         elif choice == "2":
             view_expenses(expenses)
         elif choice == "3":
-            pass  # Coming in Phase 3
+            delete_expense(expenses)
+            save_expenses(expenses)
         elif choice == "4":
-            pass  # Coming later
+            pass  # We'll add this in the next phase
         elif choice == "5":
             print("Goodbye!")
             break
