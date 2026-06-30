@@ -57,6 +57,14 @@ def delete_expense(expenses):
     except ValueError:
         print("Please enter a valid number.")
 
+def show_total(expenses):
+    if not expenses:
+        print("No expenses to calculate.")
+        return
+    
+    total = sum(expense['amount'] for expense in expenses)
+    print(f"\nTotal amount spent: ₹{total:.2f}")
+
 def main():
     expenses = load_expenses()
     
@@ -65,7 +73,7 @@ def main():
         print("1. Add Expense")
         print("2. View Expenses")
         print("3. Delete Expense")
-        print("4. Show Total")
+        print("4. Show Total Spent")
         print("5. Exit")
         
         choice = input("Enter your choice: ")
@@ -79,7 +87,7 @@ def main():
             delete_expense(expenses)
             save_expenses(expenses)
         elif choice == "4":
-            pass  # We'll add this in the next phase
+            show_total(expenses)
         elif choice == "5":
             print("Goodbye!")
             break
